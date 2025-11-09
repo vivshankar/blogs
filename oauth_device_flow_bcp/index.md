@@ -2,7 +2,7 @@
 
 # OAuth 2.0 Best Practices for Device Flow with IBM Verify
 
-The OAuth 2.0 Device Authorization Grant Flow (or simply Device Flow) enables devices with no browser or limited input capability to obtain an access token that can then be used to access protected resources. This is commonly seen on apps on Apple TV, Android TV, Amazon Echo etc. where a user is shown a QR code or link and an optional one-time authorization code and the user logs in using a companion device, like a smart phone. The device that requests for the token is called a "consumption device" and the one used by the user to authenticate and authorize the request is called an "authorization device".
+The OAuth 2.0 Device Authorization Grant Flow (or simply Device Flow) enables devices with no browser or limited input capability to obtain an access token that can then be used to access protected resources on behalf of a user. This is commonly seen in applications running on Apple TV, Android TV, Amazon Echo and others, where a user is shown a QR code or link including an optional one-time registration code. The user logs in using a companion device, like a smart phone or laptop. The device that requests for the token is called a _consumption device_ and the one used by the user to authenticate and authorize the request is called an _authorization device_.
 
 Depending on how the OAuth 2.0 client is configured, it can be prone to phishing attacks, as described in this article titled [OAuth’s Device Code Flow Abused in Phishing Attacks](https://www.secureworks.com/blog/oauths-device-code-flow-abused-in-phishing-attacks). We'll apply some of the principles described in [Cross-Device Flows: Security Best Current Practice](https://www.ietf.org/archive/id/draft-ietf-oauth-cross-device-security-12.html) to configuring an application using Device Flow on IBM Verify.
 
@@ -30,7 +30,7 @@ Depending on how the OAuth 2.0 client is configured, it can be prone to phishing
 
 5. Select the "Sign-on" tab and configure the following:
    1. Grant types - Select "Device flow". Uncheck all the other grant types.
-   2. (Optional) Public client - Enable this if the application cannot be a confidential client. This would apply to cases where an application is distributed and does not use patterns like backend-for-frontend to obtain a token using confidential client credentials.
+   2. (Optional) Public client - Enable this if the application cannot be a confidential client. This would apply to cases where the OAuth credentials have to be packaged with the application that is distributed, say, through a marketplace or application store.
 
    ![](images/basic/signon-tab.png)
 
@@ -65,19 +65,19 @@ The response is as below:
 }
 ```
 
-Typically, The device keeps track of the `device_code` and displays the `user_code` and either the `verification_uri` or the `verification_uri_complete`. Note in the diagram below that the `verification_uri` has been shortened using a custom URL shortener.
+Typically, The device keeps track of the `device_code` and displays the `user_code` and either the `verification_uri` or the `verification_uri_complete`. Note in the diagram below that the `verification_uri` has been shortened using a custom URL shortener. The `verification_uri_complete` might also be shown as a QR code if the intent is for the user to scan it with a mobile phone and use their phone's browser to complete the next step.
 
 ![](images/basic/device_display.png)
 
-When the user scans the QR code or browses to the link on a browser, the user is asked to enter the `user_code` value.
+When the user scans the QR code or browses to the link on a browser, the user is asked to enter the `user_code` value. It may be prefilled or the prompt skipped entirely when the QR encodes `verification_uri_complete` where the `user_code` is included as a query string parameter.
 
 ![](images/basic/user_authorization_enter_user_code.png)
 
-Once the user enters the user code, the user is taken through a login process and authorizes the request to proceed. This process can include the use of phishing resistant authenticators like passkeys and include adaptive MFA policies, etc.
+Once the user enters the user code, the user is taken through a login process and authorizes the request to proceed. Authentication can include the use of phishing resistant methods like passkeys and include adaptive MFA policies. Note that while user authentication on their browser can (and is recommended to) be phishing resistant, this does not make the entire device code flow phishing resistant as there is no guarantee that the `user_code` isn't that of a bad actor.
 
 ![](images/basic/user_sign_in_page.png)
 
-During this process on the device, it would usually poll for completion by invoking the token endpoint. 
+While the user is busy completing this process on their _authorization device_, the _consumption device_ will poll for completion by invoking the token endpoint:
 
 ```bash
 curl 'https://your-tenant.verify.ibm.com/oauth2/token' \
@@ -89,21 +89,21 @@ curl 'https://your-tenant.verify.ibm.com/oauth2/token' \
 
 > 📘 Note
 > 
-> While the call above shows the use of a public client, IBM Verify offers multiple client authentication methods, including the use of client secrets, JWTs, X.509 client certificates etc. The public client is used here for convenience. In many cases, this may be the only practical option if the app is not able to secure secrets.
+> While the call above shows the use of a public client, IBM Verify offers multiple client authentication methods, including the use of client secrets, JWTs, X.509 client certificates etc. The public client is used here for demonstrate and describe best practices related to the phishing attack described later in this article. In many cases, a public client may be the only practical option if the app is not able to secure secrets.
 
 When the user completes the sign in process, the token call returns a valid access token that can then be used to call protected APIs from the consumption device.
 
-In the event that the `verification_uri_complete` is used, the user is not asked to enter the user code. The user simply completes authentication.
-
 ### Challenges with the basic flow
 
-We will assume here that the attacker is aware of the client ID. Thus, the adversary can make the API call to the `device_authorization` endpoint to obtain a valid set of codes and the `verification_uri_complete`. Now consider that the adversary uses standard phishing techniques - a legitimate looking email etc. - to pass along the verification URI to the user. When the user completes the authorization flow, the adversary now has a legitimate access token that can be used to access protected resources.
+We will assume here that the attacker is aware of the client ID. Thus, the adversary can make the API call to the `device_authorization` endpoint to obtain a valid set of device and user codes, and the `verification_uri_complete`. The adversary now uses standard phishing techniques - a legitimate looking email etc. - to convince the victim to visit the attacker's `verification_uri_complete` URI and complete authorization. When the victim does this, the next poll to the token endpoint by the adversary results in legitimate access/refresh tokens that can be used to access protected resources on behalf of the victim.
 
 ![](images/basic/phishing-attack.png)
 
-Notice here that the user may use the strongest form of authentication and is still prone to this form of an attack.
+Notice here that the user may use the strongest form of authentication on their _authorization device_ and is still prone to this form of an attack.
 
 ## Applying Best Practices
+
+There are several strategies that may be employed to help mitigate this form of an attack. Many of these are discussed in detail in [Cross-Device Flows: Security Best Current Practice](https://datatracker.ietf.org/doc/draft-ietf-oauth-cross-device-security/) (draft 12 at time of writing).
 
 The following can be applied to protect the user from this form of an attack:
 
@@ -115,7 +115,7 @@ The following can be applied to protect the user from this form of an attack:
 
 ### Device code lifetime
 
-IBM Verify allows the device code lifetime to be set at a tenant level. By default, this is set to 5 minutes. Choose the appropriate value based on the expected user behaviour. For example, if the user is expected to scan the QR code using a known phone, the process of authentication will likely be under 5 minutes.
+In this section we are going to highlight how IBM Verify may be configured to implement best practices for user code lifetime (secton 6.1.2 of draft 10). By default, this is set to 5 minutes in IBM Verify. You can choose the appropriate value based on the expected user behaviour. For example, if the user is expected to scan the QR code using a known phone, the process of authentication will likely be under 5 minutes.
 
 Follow the steps below in the IBM Verify admin console:
 
@@ -129,7 +129,7 @@ Follow the steps below in the IBM Verify admin console:
 
 ### Provide context and obtain approval
 
-The Device Flow standard recommends the following.
+In this section we are going to highlight how IBM Verify may be configured to implement best practices for User Experience (secton 6.1.14 of draft 10), in particular for displaying context to the user during authorization consent. Note also that the [Device Flow standard](https://www.rfc-editor.org/rfc/rfc8628.html#section-5.4) recommends the following.
 
 ![](images/consent/rfc_phishing_snippet.png)
 
@@ -288,4 +288,4 @@ You can now repeat the device flow and you will notice the additional consent pa
 
 ## The wrap
 
-In this article, we explored the OAuth 2.0 Device Authorization Grant Flow and some of the security implications, in particular when using public OAuth 2.0 clients. We discussed how IBM Verify can be configured to apply security best practices to protect against adversaries by applying some of the recommendations in [Cross-Device Flows: Security Best Current Practice](https://datatracker.ietf.org/doc/draft-ietf-oauth-cross-device-security/).
+In this article, we explored the OAuth 2.0 Device Authorization Grant Flow and some of the security implications, in particular when using public OAuth 2.0 clients. We discussed how IBM Verify can be configured to apply mitigations to protect against adversaries by applying some of the recommendations in [Cross-Device Flows: Security Best Current Practice](https://datatracker.ietf.org/doc/draft-ietf-oauth-cross-device-security/).

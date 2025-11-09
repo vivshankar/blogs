@@ -1,0 +1,90 @@
+<mxfile host="Electron" agent="Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) draw.io/26.2.15 Chrome/134.0.6998.205 Electron/35.2.1 Safari/537.36" version="26.2.15">
+  <diagram name="phishing attack" id="Vx39nQxgWRqX57tauZM8">
+    <mxGraphModel dx="1183" dy="883" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="1169" pageHeight="827" math="0" shadow="0">
+      <root>
+        <mxCell id="0" />
+        <mxCell id="1" parent="0" />
+        <mxCell id="VI0W4XzK42cRIjTRin4Z-4" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=0;entryY=0.5;entryDx=0;entryDy=0;" edge="1" parent="1" source="VI0W4XzK42cRIjTRin4Z-1" target="VI0W4XzK42cRIjTRin4Z-3">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="VI0W4XzK42cRIjTRin4Z-5" value="1: Initiate device flow with compromised client_id" style="edgeLabel;html=1;align=left;verticalAlign=middle;resizable=0;points=[];" vertex="1" connectable="0" parent="VI0W4XzK42cRIjTRin4Z-4">
+          <mxGeometry x="-0.0932" y="-1" relative="1" as="geometry">
+            <mxPoint x="-86" y="-12" as="offset" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="VI0W4XzK42cRIjTRin4Z-1" value="" style="shape=image;verticalLabelPosition=bottom;labelBackgroundColor=default;verticalAlign=top;aspect=fixed;imageAspect=0;image=data:image/png,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;" vertex="1" parent="1">
+          <mxGeometry x="180" y="200" width="94" height="96" as="geometry" />
+        </mxCell>
+        <mxCell id="VI0W4XzK42cRIjTRin4Z-11" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;" edge="1" parent="1" source="VI0W4XzK42cRIjTRin4Z-2">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="620" y="320" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="VI0W4XzK42cRIjTRin4Z-13" value="4: Complete the user authentication on a known and trusted device" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;points=[];" vertex="1" connectable="0" parent="VI0W4XzK42cRIjTRin4Z-11">
+          <mxGeometry x="-0.1748" y="1" relative="1" as="geometry">
+            <mxPoint as="offset" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="VI0W4XzK42cRIjTRin4Z-2" value="" style="image;aspect=fixed;perimeter=ellipsePerimeter;html=1;align=center;shadow=0;dashed=0;fontColor=#4277BB;labelBackgroundColor=default;fontSize=12;spacingTop=3;image=img/lib/ibm/users/user.svg;" vertex="1" parent="1">
+          <mxGeometry x="187" y="530" width="80" height="80" as="geometry" />
+        </mxCell>
+        <mxCell id="VI0W4XzK42cRIjTRin4Z-3" value="IBM VERIFY" style="image;aspect=fixed;perimeter=ellipsePerimeter;html=1;align=center;shadow=0;dashed=0;fontColor=#4277BB;labelBackgroundColor=default;fontSize=14;spacingTop=3;image=img/lib/ibm/security/identity_access_management.svg;" vertex="1" parent="1">
+          <mxGeometry x="585" y="207" width="82" height="82" as="geometry" />
+        </mxCell>
+        <mxCell id="VI0W4XzK42cRIjTRin4Z-6" value="" style="endArrow=classic;html=1;rounded=0;entryX=1;entryY=0.75;entryDx=0;entryDy=0;dashed=1;" edge="1" parent="1" target="VI0W4XzK42cRIjTRin4Z-1">
+          <mxGeometry width="50" height="50" relative="1" as="geometry">
+            <mxPoint x="581" y="272" as="sourcePoint" />
+            <mxPoint x="540" y="310" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="VI0W4XzK42cRIjTRin4Z-7" value="Device code&lt;div&gt;user code&amp;nbsp;&lt;/div&gt;&lt;div&gt;Verification URI&lt;/div&gt;" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;points=[];labelBorderColor=default;labelBackgroundColor=#0000FF;fontColor=#FFFFFF;spacingLeft=6;spacingBottom=6;spacingRight=6;spacingTop=6;spacing=6;" vertex="1" connectable="0" parent="VI0W4XzK42cRIjTRin4Z-6">
+          <mxGeometry x="-0.0358" y="2" relative="1" as="geometry">
+            <mxPoint x="-3" y="6" as="offset" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="VI0W4XzK42cRIjTRin4Z-9" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;" edge="1" parent="1" source="VI0W4XzK42cRIjTRin4Z-1" target="VI0W4XzK42cRIjTRin4Z-2">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="250" y="350" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="VI0W4XzK42cRIjTRin4Z-12" value="3: Send a legit-looking email asking the user to login.&lt;div&gt;The attacker is using the verification_uri_complete here.&lt;/div&gt;" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;points=[];" vertex="1" connectable="0" parent="VI0W4XzK42cRIjTRin4Z-9">
+          <mxGeometry x="0.4103" y="3" relative="1" as="geometry">
+            <mxPoint as="offset" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="VI0W4XzK42cRIjTRin4Z-8" value="" style="html=1;verticalLabelPosition=bottom;align=center;labelBackgroundColor=#ffffff;verticalAlign=top;strokeWidth=2;strokeColor=#0080F0;shadow=0;dashed=0;shape=mxgraph.ios7.icons.mail;" vertex="1" parent="1">
+          <mxGeometry x="202" y="410" width="50" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="VI0W4XzK42cRIjTRin4Z-10" value="Hey there! I am contacting you from Dune. As part of our goal to secure your account, please click on this &amp;lt;&amp;lt;link&amp;gt;&amp;gt; and re-validate your access." style="shape=callout;whiteSpace=wrap;html=1;perimeter=calloutPerimeter;align=left;perimeterSpacing=0;" vertex="1" parent="1">
+          <mxGeometry x="100" y="310" width="220" height="100" as="geometry" />
+        </mxCell>
+        <mxCell id="VI0W4XzK42cRIjTRin4Z-14" value="" style="endArrow=classic;html=1;rounded=0;edgeStyle=orthogonalEdgeStyle;curved=1;exitX=0.5;exitY=0;exitDx=0;exitDy=0;entryX=0.5;entryY=0;entryDx=0;entryDy=0;" edge="1" parent="1" source="VI0W4XzK42cRIjTRin4Z-1" target="VI0W4XzK42cRIjTRin4Z-3">
+          <mxGeometry width="50" height="50" relative="1" as="geometry">
+            <mxPoint x="280" y="760" as="sourcePoint" />
+            <mxPoint x="330" y="710" as="targetPoint" />
+            <Array as="points">
+              <mxPoint x="227" y="140" />
+              <mxPoint x="626" y="140" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="VI0W4XzK42cRIjTRin4Z-15" value="5: Poll the token endpoint for completion" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;points=[];" vertex="1" connectable="0" parent="VI0W4XzK42cRIjTRin4Z-14">
+          <mxGeometry x="0.0152" y="1" relative="1" as="geometry">
+            <mxPoint as="offset" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="VI0W4XzK42cRIjTRin4Z-22" value="" style="endArrow=classic;html=1;rounded=0;dashed=1;" edge="1" parent="1">
+          <mxGeometry width="50" height="50" relative="1" as="geometry">
+            <mxPoint x="510" y="158" as="sourcePoint" />
+            <mxPoint x="350" y="158" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="VI0W4XzK42cRIjTRin4Z-23" value="Access token" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;points=[];labelBorderColor=default;labelBackgroundColor=#0000FF;fontColor=#FFFFFF;spacingLeft=6;spacingBottom=6;spacingRight=6;spacingTop=6;spacing=6;" vertex="1" connectable="0" parent="VI0W4XzK42cRIjTRin4Z-22">
+          <mxGeometry x="-0.0358" y="2" relative="1" as="geometry">
+            <mxPoint x="-3" y="-2" as="offset" />
+          </mxGeometry>
+        </mxCell>
+      </root>
+    </mxGraphModel>
+  </diagram>
+</mxfile>

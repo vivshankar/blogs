@@ -47,9 +47,10 @@ Depending on how the OAuth 2.0 client is configured, it can be prone to phishing
 Device Flow begins with a call to `/oauth2/device_authorization` from the consumption device.
 
 ```bash
-curl 'https://your-tenant.verify.ibm.com/oauth2/device_authorization' \
---header 'Content-Type: application/x-www-form-urlencoded' \
---data-urlencode 'client_id=<client_id>'
+curl -X POST \
+    'https://your-tenant.verify.ibm.com/oauth2/device_authorization' \
+    --header 'Content-Type: application/x-www-form-urlencoded' \
+    --data-urlencode 'client_id=your-client-id'
 ```
 
 The response is as below:
@@ -80,11 +81,12 @@ Once the user enters the user code, the user is taken through a login process an
 While the user is busy completing this process on their _authorization device_, the _consumption device_ will poll for completion by invoking the token endpoint:
 
 ```bash
-curl 'https://your-tenant.verify.ibm.com/oauth2/token' \
---header 'Content-Type: application/x-www-form-urlencoded' \
---data-urlencode 'client_id=device_client_id' \
---data-urlencode 'grant_type=urn:ietf:params:oauth:grant-type:device_code' \
---data-urlencode 'device_code=tKcKfPUA_hF1CIqS-uL1TxlHHg84qpVt1ssIWw7q6-E.eHPgVHStl7sG-GGN9M8GD8omTz38vavHT19idT5uKspT1O0K0k00bsyxIhNow4Y_2Ij1SEPTzyDV7t_v8BG9NQ'
+curl -X POST \
+    'https://your-tenant.verify.ibm.com/oauth2/token' \
+    --header 'Content-Type: application/x-www-form-urlencoded' \
+    --data-urlencode 'client_id=your-client-id' \
+    --data-urlencode 'grant_type=urn:ietf:params:oauth:grant-type:device_code' \
+    --data-urlencode 'device_code=tKcKfPUA_hF1CIqS-uL1TxlHHg84qpVt1ssIWw7q6-E.eHPgVHStl7sG-GGN9M8GD8omTz38vavHT19idT5uKspT1O0K0k00bsyxIhNow4Y_2Ij1SEPTzyDV7t_v8BG9NQ'
 ```
 
 > 📘 Note
@@ -293,8 +295,8 @@ In this article, we explored the OAuth 2.0 Device Authorization Grant Flow and s
 1. **Device Flow Vulnerability:** While Device Flow enables users to access applications on input-constrained devices, it is vulnerable to phishing attacks where attackers trick victims into authorizing requests that are not legitimate.
 
 2. **Defense in Depth:** It is crucial to implement multiple layers of security -
-   1. Standard OAuth 2.0 best practices like sender-constrained tokens and enforcing least privilege when issuing tokens to contain the attack surface.
-   2. Short-lived user codes.
-   3. Provide a User Experience that displays enough context to the user to verify the legitimacy of the request.
+   - Standard OAuth 2.0 best practices like sender-constrained tokens and enforcing least privilege when issuing tokens to contain the attack surface.
+   - Short-lived user codes.
+   - Provide a User Experience that displays enough context to the user to verify the legitimacy of the request.
 
 3. **Configuration in IBM Verify:** Learn how to implement the mitigations in the IBM Verify application configuration.

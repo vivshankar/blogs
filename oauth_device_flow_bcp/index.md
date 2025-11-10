@@ -1,4 +1,4 @@
-**TL;DR:** In June 2021, SecureWorks researchers published [OAuth's Device Code Flow Abused in Phishing Attacks](https://www.secureworks.com/blog/oauths-device-code-flow-abused-in-phishing-attacks). In 2022, the first draft of [Cross-Device Flows: Security Best Current Practice](https://datatracker.ietf.org/doc/draft-ietf-oauth-cross-device-security/) was published and has been continuously updated since. This BCP provides several recommendations to secure cross-device OAuth flows, like Device Flow and Client Initiated Backchannel Authentication. We'll discuss how you would implement some of the mitigations using IBM Verify.
+**TL;DR:** In June 2021, SecureWorks researchers published [OAuth's Device Code Flow Abused in Phishing Attacks](https://www.secureworks.com/blog/oauths-device-code-flow-abused-in-phishing-attacks). In 2022, the first draft of [Cross-Device Flows: Security Best Current Practice](https://datatracker.ietf.org/doc/draft-ietf-oauth-cross-device-security/) was published and has been continuously updated since. This BCP provides several recommendations to secure cross-device OAuth flows, like Device Flow and Client Initiated Backchannel Authentication. We'll discuss how you would implement important mitigations using IBM Verify.
 
 # OAuth 2.0 Best Practices for Device Flow with IBM Verify
 
@@ -65,7 +65,7 @@ The response is as below:
 }
 ```
 
-Typically, The device keeps track of the `device_code` and displays the `user_code` and either the `verification_uri` or the `verification_uri_complete`. Note in the diagram below that the `verification_uri` has been shortened using a custom URL shortener. The `verification_uri_complete` might also be shown as a QR code if the intent is for the user to scan it with a mobile phone and use their phone's browser to complete the next step.
+Typically, the device keeps track of the `device_code` and displays the `user_code` and either the `verification_uri` or the `verification_uri_complete`. Note in the diagram below that the `verification_uri` has been shortened using a custom URL shortener. The `verification_uri_complete` might also be shown as a QR code if the intent is for the user to scan it with a mobile phone and use their phone's browser to complete the next step.
 
 ![](images/basic/device_display.png)
 
@@ -95,7 +95,7 @@ When the user completes the sign in process, the token call returns a valid acce
 
 ### Challenges with the basic flow
 
-We will assume here that the attacker is aware of the client ID. Thus, the adversary can make the API call to the `device_authorization` endpoint to obtain a valid set of device and user codes, and the `verification_uri_complete`. The adversary now uses standard phishing techniques - a legitimate looking email, for example - to convince the victim to visit the attacker's `verification_uri_complete` URI and complete authorization. When the victim does this, the next poll to the token endpoint by the adversary results in access/refresh tokens that can be used to access protected resources on behalf of the victim.
+We will assume here that the attacker is aware of the client ID. Thus, the attacker can make the API call to the `device_authorization` endpoint to obtain a valid set of device and user codes, and the `verification_uri_complete`. The attacker now uses standard phishing techniques - a legitimate looking email, for example - to convince the victim to visit the attacker's `verification_uri_complete` URI and complete authorization. When the victim does this, the next poll to the token endpoint by the attacker results in access/refresh tokens that can be used to access protected resources on behalf of the victim.
 
 ![](images/basic/phishing-attack.png)
 
@@ -131,7 +131,7 @@ In this section we are going to highlight how IBM Verify may be configured to im
 
 ![](images/consent/rfc_phishing_snippet.png)
 
-You can accomplish this in IBM Verify by displaying a consent page that shows the user code and provides information, such as the following.
+You can accomplish this in IBM Verify by displaying a consent page that shows the user code and provides information, such as the following. The message shown to the user can be customized to be more specific. For example: Compare the code to the one shown on BCP Demo App on your Android TV. `70HYPR` in the image below is the user code.
 
 ![](images/consent/user_consent.png)
 
@@ -286,11 +286,11 @@ You can now repeat the device flow and you will notice the additional consent pa
 
 ## The wrap
 
-In this article, we explored the OAuth 2.0 Device Authorization Grant Flow and some of the security implications, in particular when using public OAuth 2.0 clients. We discussed how IBM Verify can be configured to apply mitigations to protect against adversaries by applying some of the recommendations in [Cross-Device Flows: Security Best Current Practice](https://datatracker.ietf.org/doc/draft-ietf-oauth-cross-device-security/).
+In this article, we explored the OAuth 2.0 Device Authorization Grant Flow and some of the security implications, in particular when using public OAuth 2.0 clients. We discussed how IBM Verify can be configured to apply mitigations to protect against attackers by applying some of the recommendations in [Cross-Device Flows: Security Best Current Practice](https://datatracker.ietf.org/doc/draft-ietf-oauth-cross-device-security/).
 
 **Key takeaways**
 
-1. **Device Flow Vulnerability:** While Device Flow enables users to access applications on input-constrained devices, it is vulnerable to phishing attacks where adversaries trick victims into authorizing requests that are not legitimate.
+1. **Device Flow Vulnerability:** While Device Flow enables users to access applications on input-constrained devices, it is vulnerable to phishing attacks where attackers trick victims into authorizing requests that are not legitimate.
 
 2. **Defense in Depth:** It is crucial to implement multiple layers of security -
    1. Standard OAuth 2.0 best practices like sender-constrained tokens and enforcing least privilege when issuing tokens to contain the attack surface.

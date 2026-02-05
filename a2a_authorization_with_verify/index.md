@@ -110,7 +110,7 @@ The sequence diagram below offers a more exhaustive view of the steps.
 
 **Scenario: User wants to check if her calendar is open**
 
-```mermaid
+<pre class="mermaid">
 sequenceDiagram
     autonumber
     participant Jessica as User Jessica
@@ -167,7 +167,7 @@ sequenceDiagram
     AuthServer->>AgenticApp: New access token with requested privileges<br/>Flow is repeated at this point to invoke the agent
     
     end
-```
+</pre>
 
 Notice that given access to the user interface in this scenario, the flow leverages OIDC authorization code flow to request for additional consent. This can optionally be replaced with OAuth 2.0 Client Initiated Backchannel Authentication. However, the user would still need to be informed through the chat-type interface that a notification has been sent to their device for approval.
 
@@ -196,7 +196,7 @@ The sequence diagram below offers a more exhaustive view of the steps.
 
 **Scenario: Autonomous Scheduling Agent identifying available slots for a periodic All Hands meeting**
 
-```mermaid
+<pre class="mermaid">
 sequenceDiagram
     autonumber
     participant Jessica as User Jessica
@@ -252,7 +252,7 @@ sequenceDiagram
     A2AServer->>APIs: Get calendar data
     A2AServer->>A2AServer: Compute availability
     A2AServer-->>AIAgent: Return available slots
-```
+</pre>
 
 ### Autonomous Agent acting without human intervention
 
@@ -274,7 +274,7 @@ The sequence diagram below offers a more exhaustive view of the steps.
 
 **Scenario: Check for support tickets**
 
-```mermaid
+<pre class="mermaid">
 sequenceDiagram
     autonumber
     participant AuthServer as IBM Verify<br/>(Authorization Server)
@@ -294,7 +294,7 @@ sequenceDiagram
     A2AServer->>APIs: Get tickets
     APIs-->>A2AServer: List of open support tickets
     A2AServer-->>AIAgent: List of open support tickets
-```
+</pre>
 
 An extension to this flow may use the `{access_token}` to exchange for another token at the A2A server. This is relevant for cases where the A2A Client may obtain a more generic token that embeds transaction context. This transaction token is exchanged for the actual token that can be used to call APIs.
 
@@ -371,3 +371,5 @@ While the A2A protocol leaves authorization to the implementer, this article est
    - Implement sender-constrained tokens to prevent token misuse
 
 By following these patterns, organizations can build A2A systems that balance the power and autonomy of AI agents with the security, privacy, and control that users and enterprises require. The combination of established OAuth 2.0 standards with agent-specific extensions provides a robust foundation for the next generation of multi-agent AI systems.
+
+<script src="https://cdn.jsdelivr.net"></script>

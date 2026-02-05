@@ -373,3 +373,4 @@ While the A2A protocol leaves authorization to the implementer, this article est
 By following these patterns, organizations can build A2A systems that balance the power and autonomy of AI agents with the security, privacy, and control that users and enterprises require. The combination of established OAuth 2.0 standards with agent-specific extensions provides a robust foundation for the next generation of multi-agent AI systems.
 
 <script src="https://cdn.jsdelivr.net"></script>
+<script>mermaid.initialize({startOnLoad:true});</script>

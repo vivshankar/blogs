@@ -169,7 +169,7 @@ sequenceDiagram
     end
 ```
 
-Notice that given access to the user interface in this scenario, the flow leverages OIDC authorization code flow to request for additional consent. This can optionally be replaced with OAuth 2.0 Client Initiated Backchannel Authentication. However, the user would still need to be informed through the chat-type interface that a notification has been sent to their device for approval.
+Since the user interface is accessible in this scenario, the flow leverages OIDC authorization code flow to request for additional consent. This can optionally be replaced with OAuth 2.0 Client Initiated Backchannel Authentication. However, the user would still need to be informed through the chat-type interface that a notification has been sent to their device for approval.
 
 ### Autonomous Agent acting on behalf of a user
 

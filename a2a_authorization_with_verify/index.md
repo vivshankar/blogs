@@ -13,7 +13,7 @@ Learn how to implement standards-based OAuth 2.0 authorization patterns using IB
 
 The [Agent2Agent (A2A) protocol](https://a2a-protocol.org/) is a communication protocol for AI agents, initially introduced by Google in April 2025. This open protocol is designed for multi-agent systems, allowing interoperability between AI agents from varied providers or those built using different AI agent frameworks.
 
-This article assumes an understanding of the Agent2Agent specification and the components, like the A2A client and server, Agent card, task, etc. For a primer on the A2A protocol, refer to the [A2A specification](https://a2a-protocol.org/specification/) or this article [published by IBM](https://www.ibm.com/think/topics/agent2agent-protocol).
+This article assumes an understanding of the Agent2Agent specification and the components, like the A2A client and server, Agent card, task, etc. For a primer on the A2A protocol, refer to the [A2A specification](https://a2a-protocol.org/latest/specification/) or this article [published by IBM](https://www.ibm.com/think/topics/agent2agent-protocol).
 
 ## The Critical Need for Authorization in A2A Systems
 
